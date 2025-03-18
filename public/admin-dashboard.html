@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administrador - La Salle San Luis</title>
+    <link rel="icon" type="image/x-icon" href="logo.ico">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="header-content">
+                <h1>Panel de Administrador</h1>
+                <button id="logoutBtn" class="logout-btn">Cerrar Sesión</button>
+            </div>
+        </header>
+
+        <main class="dashboard-main">
+            <div class="admin-panel">
+                <div class="panel-section">
+                    <div class="section-header">
+                        <h2>Gestión de Usuarios</h2>
+                        <button id="addUserBtn" class="add-btn">Añadir Usuario</button>
+                    </div>
+                    <div class="table-container">
+                        <table id="userTable">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Usuario</th>
+                                    <th>Tipo</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="userTableBody">
+                                <!-- Will be populated with JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- User Modal -->
+        <div id="userModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Añadir Usuario</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <form id="userForm">
+                    <div class="form-group">
+                        <label for="userType">Tipo de Usuario</label>
+                        <select id="userType" required>
+                            <option value="">Seleccionar tipo</option>
+                            <option value="worker">Trabajador</option>
+                            <option value="parent">Padre/Madre</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userName">Nombre Completo</label>
+                        <input type="text" id="userName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userUsername">Nombre de Usuario</label>
+                        <input type="text" id="userUsername" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userPassword">Contraseña</label>
+                        <input type="password" id="userPassword" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userPasswordConfirm">Confirmar Contraseña</label>
+                        <input type="password" id="userPasswordConfirm" required>
+                    </div>
+
+                    <!-- Student Information Section (for parents) -->
+                    <div id="studentSection" style="display: none;">
+                        <h4>Información de Estudiantes</h4>
+                        <div id="studentsList">
+                            <div class="student-entry">
+                                <div class="form-group">
+                                    <label>Nombre del Estudiante</label>
+                                    <input type="text" class="student-name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Curso</label>
+                                    <select class="student-course" required>
+                                        <option value="">Seleccionar curso</option>
+                                        <option value="hh">HH</option>
+                                        <option value="lh1">LH1</option>
+                                        <option value="lh2">LH2</option>
+                                        <option value="lh3">LH3</option>
+                                        <option value="lh4">LH4</option>
+                                        <option value="lh5">LH5</option>
+                                        <option value="lh6">LH6</option>
+                                        <option value="dbh1">DBH1</option>
+                                        <option value="dbh2">DBH2</option>
+                                        <option value="dbh3">DBH3</option>
+                                        <option value="dbh4">DBH4</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="addStudentBtn" class="secondary-btn">+ Añadir otro estudiante</button>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn">Guardar</button>
+                        <button type="button" class="cancel-btn">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="admin-dashboard.js"></script>
+</body>
+</html>

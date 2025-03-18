@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Padres - La Salle San Luis</title>
+    <link rel="icon" type="image/x-icon" href="logo.ico">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="header-content">
+                <h1>Panel de Padres</h1>
+                <button id="logoutBtn" class="logout-btn">Cerrar Sesión</button>
+            </div>
+        </header>
+
+        <main class="dashboard-main">
+            <div class="grades-view">
+                <div class="grades-header">
+                    <h2>Calificaciones de Comedor</h2>
+                    <p class="date-info">Última actualización: <span id="lastUpdate"></span></p>
+                </div>
+
+                <div id="studentGrades">
+                    <!-- Student sections will be populated here -->
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="parent-dashboard.js"></script>
+</body>
+</html>
