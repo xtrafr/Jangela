@@ -16,6 +16,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const studentsList = document.getElementById('studentsList');
     const logoutBtn = document.getElementById('logoutBtn');
 
+    // Initialize localStorage if needed
+    if (!localStorage.getItem('users')) {
+        localStorage.setItem('users', JSON.stringify([
+            {
+                id: 1,
+                name: 'Admin',
+                username: 'admin',
+                password: 'admin',
+                type: 'admin'
+            }
+        ]));
+    }
+    if (!localStorage.getItem('students')) {
+        localStorage.setItem('students', JSON.stringify([]));
+    }
+
     // Show/hide student section based on user type selection
     userType.addEventListener('change', function() {
         studentSection.style.display = this.value === 'parent' ? 'block' : 'none';
@@ -82,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Handle form submission
-    userForm.addEventListener('submit', async function(e) {
+    userForm.addEventListener('submit', function(e) {
         e.preventDefault();
 
         // Validate passwords match
@@ -95,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Get form data
         const userData = {
-            id: Date.now(), // Simple way to generate unique ID
+            id: Date.now(),
             name: document.getElementById('userName').value,
             username: document.getElementById('userUsername').value,
             password: password,
@@ -105,24 +121,20 @@ document.addEventListener('DOMContentLoaded', function() {
         // Get student information if parent
         if (userData.type === 'parent') {
             const studentEntries = studentsList.querySelectorAll('.student-entry');
-            const students = Array.from(studentEntries).map(entry => ({
+            const newStudents = Array.from(studentEntries).map(entry => ({
+                id: Date.now() + Math.random(),
                 name: entry.querySelector('.student-name').value,
-                course: entry.querySelector('.student-course').value
+                course: entry.querySelector('.student-course').value,
+                parentId: userData.id
             }));
 
-            if (students.length === 0) {
+            if (newStudents.length === 0) {
                 alert('Debe añadir al menos un estudiante');
                 return;
             }
 
             // Save students to localStorage
             const existingStudents = JSON.parse(localStorage.getItem('students')) || [];
-            const newStudents = students.map(student => ({
-                id: Date.now() + Math.random(), // Simple way to generate unique ID
-                name: student.name,
-                course: student.course,
-                parentId: userData.id
-            }));
             localStorage.setItem('students', JSON.stringify([...existingStudents, ...newStudents]));
         }
 
@@ -139,8 +151,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load and display users
     function loadUsers() {
         const users = JSON.parse(localStorage.getItem('users')) || [];
-        const tableBody = document.getElementById('userTableBody');
         const students = JSON.parse(localStorage.getItem('students')) || [];
+        const tableBody = document.getElementById('userTableBody');
 
         tableBody.innerHTML = '';
         users.forEach(user => {
